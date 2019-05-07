@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>Images/Icons/MainView_Icon.png</file>
+        <file>Images/Icons/Report_Card_Icon.png</file>
+        <file>Images/Icons/Score_Tab_Icon.png</file>
+        <file>Images/Icons/Students_Icon.png</file>
+        <file>Images/Icons/close.png</file>
+        <file>Images/Icons/home.png</file>
+        <file>Images/Icons/icons8-edit-file-64.png</file>
+        <file>Images/Icons/icons8-land-mine-64.png</file>
+        <file>Images/Icons/icons8-services-64.png</file>
+        <file>Images/Icons/login.png</file>
+        <file>Images/Icons/logout.png</file>
+        <file>Images/Icons/new.png</file>
+        <file>Images/Icons/open.png</file>
+        <file>Images/Icons/print.png</file>
+        <file>Images/Icons/settings.png</file>
+        <file>Images/Icons/streams.png</file>
+        <file>Images/Icons/subject.png</file>
+        <file>Images/Icons/tools.png</file>
+        <file>Images/Icons/view.png</file>
+        <file>Images/Icons/warning.png</file>
+        <file>Images/Icons/exit.png</file>
+        <file>Images/Icons/enter.png</file>
+        <file>Images/Icons/redo.png</file>
+        <file>Images/Icons/undo.png</file>
+    </qresource>
+    <qresource prefix="/files">
+        <file>Files/Settings.json</file>
+    </qresource>
+    <qresource prefix="/qml">
+        <file>Files/HomeTab.qml</file>
+        <file>Files/ResultTab.qml</file>
+    </qresource>
+</RCC>

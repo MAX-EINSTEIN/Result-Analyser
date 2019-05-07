@@ -1,0 +1,24 @@
+{
+  "applicationTitle": "Result Analyser - Performance Report Generator",
+  "appShortTitle": "RA",
+  "schoolName":"abc school",
+  "schoolBranch":"no branch",
+  "schoolIcon":":/img/Images/Icons/home.png",
+  "password": "admin123",
+  "maxSections": 15,
+  "maxStreams":5,
+  "streams": [
+    "Science",
+    "Commerce",
+    "Humanities",
+    "Vocational"
+  ],
+  "maxSubjects": 10,
+  "subjects": [
+    "English",
+    "Physics",
+    "Chemistry",
+    "Maths",
+    "Computer Science"
+  ]
+}
