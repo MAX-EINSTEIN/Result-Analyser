@@ -1,4 +1,4 @@
 # Ignoring User Specific Files
 3rdParty/
 *.pro.user
-*.pro.user.4.9-pre1
+*.pro.user.*
