@@ -18,6 +18,4 @@ struct Settings_Data{
     QString _newSubject;
 };
 
-
-
 #endif // SETTINGS_DATA_HPP

@@ -27,6 +27,7 @@ public:
     explicit Settings(QObject *parent, QString filename);
     void ParseJsonData();
     void SetJsonDocument();
+    static Settings* returnInstance();
 
     QString filename() const;
 

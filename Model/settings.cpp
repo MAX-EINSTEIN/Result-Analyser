@@ -1,6 +1,7 @@
 #include "settings.h"
 
 static  QString RESOURCE_PREFIX = QStringLiteral(":/files/Files");
+static const QString SETTINGS_FILE = QStringLiteral("Settings.json");
 
 
 Settings::Settings(QObject *parent, QString filename):
@@ -334,6 +335,11 @@ void Settings::SetJsonDocument()
 {
     _jsonDoc = *new QJsonDocument(_jsonObject);
     _newSettings = _jsonDoc.toJson();
+}
+
+Settings* Settings::returnInstance()
+{
+    return new Settings(nullptr,SETTINGS_FILE);
 }
 
 

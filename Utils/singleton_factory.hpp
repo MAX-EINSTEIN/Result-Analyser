@@ -5,14 +5,28 @@
 #include <memory>
 #include "Model/settings.h"
 
-class Singleton_Factory final
+template<typename T>
+class SingletonFactory final
 {
 public:
-    static Settings& GetSettingsAsSingleton();
+    static T& GetClassAsSingleton();
 private:
-    static std::unique_ptr<Settings> _SettingsInstance;
-    explicit Singleton_Factory(const Singleton_Factory &rhs) = delete ;
-    Singleton_Factory &operator= (const Singleton_Factory &rhs) = delete ;
+    static std::unique_ptr<T> _ClassInstance;
+    explicit SingletonFactory(const SingletonFactory &rhs) = delete ;
+    SingletonFactory &operator= (const SingletonFactory &rhs) = delete;
 };
+
+template<typename T>
+std::unique_ptr<T> SingletonFactory<T>::_ClassInstance = nullptr;
+
+template<typename T>
+T& SingletonFactory<T>::GetClassAsSingleton(){
+    if(_ClassInstance == nullptr){
+        _ClassInstance = std::unique_ptr<T>(T::returnInstance());
+    }
+    return *_ClassInstance;
+}
+
+
 
 #endif // SINGLETON_FACTORY_HPP

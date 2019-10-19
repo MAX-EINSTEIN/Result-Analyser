@@ -22,31 +22,54 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++17
+
+
+# Set environment values for Qxlnt. You may use default values.
+
+msvc:DEFINES+=XLNT_IMPORT
+
+include(3rdparty/Qxlnt/Qxlnt/Qxlnt.pri)
+INCLUDEPATH += 3rdparty/Qxlnt/xlnt/include/
+
+msvc{
+# message('Visual C++ EXE TYPE')
+CONFIG(debug, debug|release) {
+QMAKE_POST_LINK += copy 3rdparty/Qxlnt/Qxlnt/Qxlnt.dll .\debug\
+QMAKE_POST_LINK += copy 3rdparty/Qxlnt/Qxlnt/Qxlnt.lib .\debug\
+LIBS+= .\debug/Qxlnt.lib
+} else {
+LIBS+= .\release/Qxlnt.lib
+QMAKE_POST_LINK += copy 3rdparty/Qxlnt/Qxlnt/release/Qxlnt.dll .\release\
+}
+}
+
+
 
 SOURCES += \
-    Utils/pythread.cpp \
+    Utils/exceltool.cpp \
+    Utils/performancereportgenerator.cpp \
+    Utils/resultanalyser.cpp \
     View/mainview.cpp \
     View/loginwindow.cpp \
     View/classes.cpp \
     Model/settings.cpp \
     Controller/settings_manager.cpp \
     View/settings_dialog.cpp \
-    Utils/singleton_factory.cpp \
     View/themewidget.cpp \
     main.cpp
 
 
 HEADERS += \
-    Utils/pyhelper.hpp \
-    Utils/pythread.h \
+    Utils/exceltool.hpp \
+    Utils/performancereportgenerator.hpp \
+    Utils/resultanalyser.hpp \
     View/mainview.h \
     View/loginwindow.h \
     View/classes.h \
     Model/settings.h \
     Controller/settings_manager.h \
     View/settings_dialog.h \
-    Utils/dataanalyser.hpp \
     Utils/settings_data.hpp \
     Utils/singleton_factory.hpp \
     View/themewidget.h
@@ -67,16 +90,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     resources.qrc
 
-#INCLUDEPATH += $$PWD/3rdparty/pybind11
-
 DISTFILES += \
-    Files/ResultTab.qml \
-    pyemb3.py
+    Files/ResultTab.qml
 
-win32:CONFIG(release, debug|release): LIBS += -LC:/Users/HP.LAP/AppData/Local/Programs/Python/Python37-32/libs/ -lpython37
-else:win32:CONFIG(debug, debug|release): LIBS += -LC:/Users/HP.LAP/AppData/Local/Programs/Python/Python37-32/libs/ -lpython37
-else:unix: LIBS += -LC:/Users/HP.LAP/AppData/Local/Programs/Python/Python37-32/libs/ -lpython37
 
-INCLUDEPATH += C:/Users/HP.LAP/AppData/Local/Programs/Python/Python37-32/include
-INCLUDEPATH += C:/Users/HP.LAP/AppData/Local/Programs/Python/Python37-32/libs
-DEPENDPATH += C:/Users/HP.LAP/AppData/Local/Programs/Python/Python37-32/libs

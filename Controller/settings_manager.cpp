@@ -1,7 +1,7 @@
 #include "settings_manager.h"
 
 Settings_Manager::Settings_Manager():
-    _appSettings(Singleton_Factory::GetSettingsAsSingleton()),
+    _appSettings(SingletonFactory<Settings>::GetClassAsSingleton()),
     _loginScreen(new LoginWindow(nullptr)),
     _mainScreen(nullptr),
     _sidebarPanel(nullptr)
@@ -19,8 +19,6 @@ void Settings_Manager::InitSettings()
 {
     _appSettings.ParseJsonData();
 }
-
-
 
 
 void Settings_Manager::SetupWindows()
