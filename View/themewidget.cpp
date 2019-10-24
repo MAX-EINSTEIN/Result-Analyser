@@ -27,7 +27,7 @@
 **
 ****************************************************************************/
 
-#include "themewidget.h"
+#include "themewidget.hpp"
 #include "ui_themewidget.h"
 
 #include <QtCharts/QChartView>
@@ -218,7 +218,7 @@ QChart *ThemeWidget::createAreaChart() const
 
 QChart *ThemeWidget::createBarChart(int valueCount) const
 {
-    Q_UNUSED(valueCount);
+    Q_UNUSED(valueCount)
     QChart *chart = new QChart();
     chart->setTitle("Bar chart");
 

@@ -1,7 +1,7 @@
 #ifndef LOGINWINDOW_H
 #define LOGINWINDOW_H
 
-#include "View/mainview.h"
+#include "View/mainview.hpp"
 #include <QDialog>
 
 namespace Ui {

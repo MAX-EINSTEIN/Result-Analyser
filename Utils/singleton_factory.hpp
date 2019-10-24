@@ -1,9 +1,8 @@
 #ifndef SINGLETON_FACTORY_HPP
 #define SINGLETON_FACTORY_HPP
 
-
 #include <memory>
-#include "Model/settings.h"
+#include "Model/settings.hpp"
 
 template<typename T>
 class SingletonFactory final
@@ -26,7 +25,5 @@ T& SingletonFactory<T>::GetClassAsSingleton(){
     }
     return *_ClassInstance;
 }
-
-
 
 #endif // SINGLETON_FACTORY_HPP

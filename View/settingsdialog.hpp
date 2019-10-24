@@ -53,16 +53,16 @@ public:
 
 
 private slots:
-    void on_bb_ok_cancel_accepted();
+    void onSettingsChangeAccepted();
 
-    void on_pb_addStream_clicked();
+    void onAddStream();
 
-    void on_pb_addSubject_clicked();
+    void onAddSubject();
 
-    void on_toolButton_clicked();
+    void onToolButtonClicked();
 
 signals:
-    Settings_Data& Save_Settings(Settings_Data &settings_data);
+    Settings_Data& saveSettings(Settings_Data &settings_data);
 
 private:
 

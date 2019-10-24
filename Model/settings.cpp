@@ -1,4 +1,4 @@
-#include "settings.h"
+#include "settings.hpp"
 
 static  QString RESOURCE_PREFIX = QStringLiteral(":/files/Files");
 static const QString SETTINGS_FILE = QStringLiteral("Settings.json");
@@ -12,16 +12,16 @@ Settings::Settings(QObject *parent, QString filename):
 }
 
 
-void Settings::ParseJsonData()
+void Settings::parseJsonData()
 {
-    QString raw_json = ReadJsonFile();
+    QString raw_json = readJsonFile();
     if(raw_json.size() == 0)return;
 
-    JsonObjErrPair result = GetJsonObject(raw_json);
+    JsonObjErrPair result = getJsonObject(raw_json);
     QJsonParseError json_error = result.second;
     if(json_error.error != QJsonParseError::NoError)
     {
-        ShowJasonParseError(json_error);
+        showJasonParseError(json_error);
     }
 
     _jsonObject = result.first;
@@ -34,9 +34,9 @@ void Settings::ParseJsonData()
     _password = _jsonObject["password"].toString();
     _maxSections = _jsonObject["maxSections"].toInt();
     _maxStreams = _jsonObject["maxStreams"].toInt();
-    FillStringLists(_streamsList,_jsonObject["streams"].toArray());
+    fillStringLists(_streamsList,_jsonObject["streams"].toArray());
     _maxSubjects = _jsonObject["maxSubjects"].toInt();
-    FillStringLists(_subjectsList,_jsonObject["subjects"].toArray());
+    fillStringLists(_subjectsList,_jsonObject["subjects"].toArray());
 }
 
 
@@ -181,16 +181,16 @@ void Settings::setSubjectsList(const std::vector<std::string> &subjectsList)
 }
 
 
-QString Settings::ReadJsonFile()
+QString Settings::readJsonFile()
 {
-    QString default_Settings = ReadJsonFromInternalResource();
-    QDir config_dir = OpenConfigDirectory();
+    QString default_Settings = readJsonFromInternalResource();
+    QDir config_dir = openConfigDirectory();
     QFile std_file(config_dir.filePath(_filename));
     if(std_file.exists())
     {
         if(!std_file.open((QFile::ReadOnly | QFile::Text)))
         {
-            SendErrorMessage("Cannot Open Config File");
+            sendErrorMessage("Cannot Open Config File");
             return  default_Settings;
         }
         QString settings = std_file.readAll();
@@ -199,21 +199,21 @@ QString Settings::ReadJsonFile()
     }
     else
     {
-        WriteDefaultsToStdConfigFile(std_file,default_Settings);
+        writeDefaultsToStdConfigFile(std_file,default_Settings);
         return  default_Settings;
     }
 }
 
 
-void Settings::WriteJsonFile()
+void Settings::writeJsonFile()
 {
-    QDir config_dir = OpenConfigDirectory();
+    QDir config_dir = openConfigDirectory();
     QFile std_file(config_dir.filePath(_filename));
     if(std_file.exists())
     {
         if(!std_file.remove())
         {
-            SendErrorMessage("Cannot Delete Config File");
+            sendErrorMessage("Cannot Delete Config File");
             return;
         }
     }
@@ -222,35 +222,35 @@ void Settings::WriteJsonFile()
     int length = _newSettings.length();
     if(!std_file.open(QFile::WriteOnly | QFile::Text))
     {
-        SendErrorMessage("Cannot Open Config File " + std_file.fileName());
+        sendErrorMessage("Cannot Open Config File " + std_file.fileName());
     }
 
     long long bytes_written = std_file.write(qPrintable(_newSettings),length);
     if(bytes_written != length)
     {
-        SendErrorMessage("Cannot write to File " + std_file.fileName());
+        sendErrorMessage("Cannot write to File " + std_file.fileName());
         if(!std_file.remove())
         {
-            SendErrorMessage("Cannot Remove config file. Please delete the file manually. FilePath : "+std_file.fileName());
+            sendErrorMessage("Cannot Remove config file. Please delete the file manually. FilePath : "+std_file.fileName());
         }
     }
     std_file.close();
 }
 
 
-QString Settings::ReadJsonFromInternalResource()
+QString Settings::readJsonFromInternalResource()
 {
     QDir res_dir(RESOURCE_PREFIX);
     if(!res_dir.exists())
     {
-        SendErrorMessage("Cannot find internal path " + res_dir.canonicalPath());
+        sendErrorMessage("Cannot find internal path " + res_dir.canonicalPath());
         return "";
     }
     QString path = res_dir.filePath(_filename);
     QFile res_file(path);
     if(!res_file.open(QFile::ReadOnly | QFile::Text))
     {
-        SendErrorMessage("No file named " + path + " found");
+        sendErrorMessage("No file named " + path + " found");
         return "";
     }
     QString Settings = res_file.readAll();
@@ -259,19 +259,19 @@ QString Settings::ReadJsonFromInternalResource()
 }
 
 
-void Settings::WriteJsonToInternalResource()
+void Settings::writeJsonToInternalResource()
 {
     QDir res_dir(RESOURCE_PREFIX);
     if(!res_dir.exists())
     {
-        SendErrorMessage("Cannot find internal path " + res_dir.canonicalPath());
+        sendErrorMessage("Cannot find internal path " + res_dir.canonicalPath());
     }
     QString path = res_dir.filePath(_filename);
     QFile res_file(path);
 
     if(!res_file.open(QFile::WriteOnly | QFile::Text))
     {
-        SendErrorMessage("Cannot Open Config File " + res_file.fileName());
+        sendErrorMessage("Cannot Open Config File " + res_file.fileName());
     }
 
     int length = _newSettings.length();
@@ -279,17 +279,17 @@ void Settings::WriteJsonToInternalResource()
     long long bytes_written = res_file.write(qPrintable(_newSettings),length);
     if(bytes_written != length)
     {
-        SendErrorMessage("Cannot write to File " + res_file.fileName());
+        sendErrorMessage("Cannot write to File " + res_file.fileName());
         if(!res_file.remove())
         {
-            SendErrorMessage("Cannot Remove config file. Please delete the file manually. FilePath : "+res_file.fileName());
+            sendErrorMessage("Cannot Remove config file. Please delete the file manually. FilePath : "+res_file.fileName());
         }
     }
     res_file.close();
 }
 
 
-QDir Settings::OpenConfigDirectory()
+QDir Settings::openConfigDirectory()
 {
     QDir config_dir(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation));
     if(!config_dir.exists())
@@ -301,28 +301,28 @@ QDir Settings::OpenConfigDirectory()
 }
 
 
-void Settings::WriteDefaultsToStdConfigFile(QFile &file, const QString &settings)
+void Settings::writeDefaultsToStdConfigFile(QFile &file, const QString &settings)
 {
     int length = settings.length();
     if(!file.open(QFile::WriteOnly | QFile::Text))
     {
-        SendErrorMessage("Cannot Open Config File " + file.fileName());
+        sendErrorMessage("Cannot Open Config File " + file.fileName());
     }
 
     long long bytes_written = file.write(qPrintable(settings),length);
     if(bytes_written != length)
     {
-        SendErrorMessage("Cannot write to File " + file.fileName());
+        sendErrorMessage("Cannot write to File " + file.fileName());
         if(!file.remove())
         {
-            SendErrorMessage("Cannot Remove config file. Please delete the file manually. FilePath : "+file.fileName());
+            sendErrorMessage("Cannot Remove config file. Please delete the file manually. FilePath : "+file.fileName());
         }
     }
     file.close();
 }
 
 
-JsonObjErrPair Settings::GetJsonObject(const QString &raw_json)
+JsonObjErrPair Settings::getJsonObject(const QString &raw_json)
 {
     QJsonParseError json_parse_error;
     _jsonDoc = QJsonDocument::fromJson(raw_json.toUtf8(),&json_parse_error);
@@ -331,7 +331,7 @@ JsonObjErrPair Settings::GetJsonObject(const QString &raw_json)
 }
 
 
-void Settings::SetJsonDocument()
+void Settings::setJsonDocument()
 {
     _jsonDoc = *new QJsonDocument(_jsonObject);
     _newSettings = _jsonDoc.toJson();
@@ -343,11 +343,11 @@ Settings* Settings::returnInstance()
 }
 
 
-void Settings::SaveNewConfiguration(Settings_Data &Data)
+void Settings::saveNewConfiguration(Settings_Data &Data)
 {
     _jsonObject["schoolName"] = Data._schoolName;
     _jsonObject["schoolBranch"] = Data._schoolBranch;
-    //_jsonObject["schoolIcon"] = Data._schoolIcon;
+    _jsonObject["schoolIcon"] = Data._schoolIcon;
     _jsonObject["password"] = Data._password;
     _jsonObject["maxStreams"] = Data._streamsCount;
     _jsonObject["maxSubjects"] = Data._subjects_count;
@@ -355,26 +355,26 @@ void Settings::SaveNewConfiguration(Settings_Data &Data)
     setStreamsList(Data._streamsList);
     setSubjectsList(Data._subjectsList);
 
-    SetJsonDocument();
+    setJsonDocument();
 
-    WriteJsonFile();
+    writeJsonFile();
 }
 
 
-void Settings::FillStringLists(std::vector<std::string> &list, QJsonArray arr)
+void Settings::fillStringLists(std::vector<std::string> &list, QJsonArray arr)
 {
     for(auto item:arr)
         list.push_back(item.toString().toStdString());
 }
 
 
-void Settings::SendErrorMessage(const QString &msg)
+void Settings::sendErrorMessage(const QString &msg)
 {
-    emit NotifyStatusMessage(msg);
+    emit notifyStatusMessage(msg);
 }
 
 
-void Settings::ShowJasonParseError(QJsonParseError &json_error)
+void Settings::showJasonParseError(QJsonParseError &json_error)
 {
     QString msg = tr("Error Parsing Json Document");
     msg.append(json_error.errorString());

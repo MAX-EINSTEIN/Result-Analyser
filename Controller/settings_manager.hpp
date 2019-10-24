@@ -3,12 +3,12 @@
 
 #include <QObject>
 
-#include "Model/settings.h"
+#include "Model/settings.hpp"
 #include "Utils/singleton_factory.hpp"
-#include "View/loginwindow.h"
-#include "View/mainview.h"
-#include "View/classes.h"
-#include "View/settings_dialog.h"
+#include "View/loginwindow.hpp"
+#include "View/mainview.hpp"
+#include "View/classes.hpp"
+#include "View/settingsdialog.hpp"
 
 
 class Settings_Manager:public QObject
@@ -17,7 +17,7 @@ class Settings_Manager:public QObject
 
 public:
     Settings_Manager();
-    void StartProgram();
+    void startProgram();
 
 private:
     Settings &_appSettings;
@@ -26,8 +26,8 @@ private:
     Classes * _sidebarPanel;
     Settings_Dialog * _settingsScreen;
 
-    void InitSettings();
-    void SetupWindows();
+    void initSettings();
+    void setupWindows();
 };
 
 #endif // SETTINGS_MANAGER_H

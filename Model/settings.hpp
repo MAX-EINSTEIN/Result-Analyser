@@ -25,8 +25,8 @@ class Settings : public QObject
     Q_OBJECT
 public:
     explicit Settings(QObject *parent, QString filename);
-    void ParseJsonData();
-    void SetJsonDocument();
+    void parseJsonData();
+    void setJsonDocument();
     static Settings* returnInstance();
 
     QString filename() const;
@@ -63,10 +63,10 @@ public:
     void setSubjectsList(const std::vector<std::string> &subjectsList);
 
 signals:
-    void NotifyStatusMessage(QString msg);
+    void notifyStatusMessage(QString msg);
 
 public slots:
-    void SaveNewConfiguration(Settings_Data &Data);
+    void saveNewConfiguration(Settings_Data &Data);
 
 private:
     QString _filename;
@@ -87,16 +87,16 @@ private:
     QString _newSettings;
 
 
-    QString ReadJsonFile();
-    void WriteJsonFile();
-    QString ReadJsonFromInternalResource();
-    void WriteJsonToInternalResource();
-    QDir OpenConfigDirectory();
-    void WriteDefaultsToStdConfigFile(QFile &file,const QString &settings);
-    JsonObjErrPair GetJsonObject(const QString &raw_json);
-    void FillStringLists(std::vector<std::string> &list,QJsonArray arr);
-    void SendErrorMessage(const QString& msg);
-    void ShowJasonParseError(QJsonParseError &json_error);
+    QString readJsonFile();
+    void writeJsonFile();
+    QString readJsonFromInternalResource();
+    void writeJsonToInternalResource();
+    QDir openConfigDirectory();
+    void writeDefaultsToStdConfigFile(QFile &file,const QString &settings);
+    JsonObjErrPair getJsonObject(const QString &raw_json);
+    void fillStringLists(std::vector<std::string> &list,QJsonArray arr);
+    void sendErrorMessage(const QString& msg);
+    void showJasonParseError(QJsonParseError &json_error);
 
     explicit Settings(const Settings &s) = delete ;
     Settings& operator= (const Settings &s) = delete;

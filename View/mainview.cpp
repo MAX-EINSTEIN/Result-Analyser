@@ -1,11 +1,12 @@
-#include "View/mainview.h"
-#include "View/themewidget.h"
+#include "View/mainview.hpp"
+#include "View/themewidget.hpp"
 #include "ui_mainview.h"
 #include <QQuickView>
 #include <QQuickItem>
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
 #include <QDebug>
+#include <QtDebug>
 
 MainView::MainView(QWidget *parent) :
     QMainWindow(parent),
@@ -54,10 +55,10 @@ MainView::MainView(QWidget *parent) :
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openFile()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(exit()));
     connect(ui->actionPrint, SIGNAL(triggered()), this, SLOT(print()));
-    connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(VisitHomeView()));
-    connect(ui->actionStudents, SIGNAL(triggered()), this, SLOT(VisitStudentsView()));
-    connect(ui->actionScores, SIGNAL(triggered()), this, SLOT(VisitScoresView()));
-    connect(ui->actionResults, SIGNAL(triggered()),this, SLOT(VisitResultsView()));
+    connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(visitHomeView()));
+    connect(ui->actionStudents, SIGNAL(triggered()), this, SLOT(visitStudentsView()));
+    connect(ui->actionScores, SIGNAL(triggered()), this, SLOT(visitScoresView()));
+    connect(ui->actionResults, SIGNAL(triggered()),this, SLOT(visitResultsView()));
 }
 
 MainView::~MainView()
@@ -108,8 +109,10 @@ void MainView::newFile()
 
 void MainView::openFile()
 {
-    _filename = QFileDialog::getOpenFileName(this,"Choose a excel document",QDir::homePath(),"Old Excel Files (*.xls) ;;  New Excel Files(*.xlsl)");
-    fileOpened(_filename.toStdString());
+    _filename = QFileDialog::getOpenFileName(this,"Choose a excel document",QDir::homePath(),"Old Excel Files (*.xls) ;;  New Excel Files(*.xlsx)");
+    //fileOpened(_filename.toStdString());
+    qDebug(_filename.toStdString().c_str());
+    ExcelTool::processFile(_filename.toStdString());
 }
 
 void MainView::closeFile()
@@ -131,12 +134,12 @@ void MainView::print()
     //ui->textEdit->print(&printer);
 }
 
-void MainView::Undo()
+void MainView::undo()
 {
 
 }
 
-void MainView::Redo()
+void MainView::redo()
 {
 
 }
@@ -150,22 +153,22 @@ void MainView::openSettings()
     }
 }
 
-void MainView::VisitHomeView()
+void MainView::visitHomeView()
 {
     ui->tw_Students->setCurrentIndex(0);
 }
 
-void MainView::VisitStudentsView()
+void MainView::visitStudentsView()
 {
     ui->tw_Students->setCurrentIndex(1);
 }
 
-void MainView::VisitScoresView()
+void MainView::visitScoresView()
 {
     ui->tw_Students->setCurrentIndex(2);
 }
 
-void MainView::VisitResultsView()
+void MainView::visitResultsView()
 {
     ui->tw_Students->setCurrentIndex(3);
 }

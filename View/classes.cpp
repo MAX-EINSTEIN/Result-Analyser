@@ -1,4 +1,4 @@
-#include "View\classes.h"
+#include "View\classes.hpp"
 #include "ui_classes.h"
 #include <string>
 

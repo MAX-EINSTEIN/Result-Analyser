@@ -1,4 +1,4 @@
-#include "settings_manager.h"
+#include "settings_manager.hpp"
 
 Settings_Manager::Settings_Manager():
     _appSettings(SingletonFactory<Settings>::GetClassAsSingleton()),
@@ -9,21 +9,21 @@ Settings_Manager::Settings_Manager():
 
 }
 
-void Settings_Manager::StartProgram()
+void Settings_Manager::startProgram()
 {
-    SetupWindows();
+    setupWindows();
 }
 
 
-void Settings_Manager::InitSettings()
+void Settings_Manager::initSettings()
 {
-    _appSettings.ParseJsonData();
+    _appSettings.parseJsonData();
 }
 
 
-void Settings_Manager::SetupWindows()
+void Settings_Manager::setupWindows()
 {
-    InitSettings();
+    initSettings();
 
     _mainScreen = new MainView(nullptr);
 
@@ -55,5 +55,5 @@ void Settings_Manager::SetupWindows()
     _loginScreen->show();
 
 
-    connect(_settingsScreen,SIGNAL(Save_Settings(Settings_Data&)),&_appSettings,SLOT(SaveNewConfiguration(Settings_Data&)));
+    connect(_settingsScreen,SIGNAL(saveSettings(Settings_Data&)),&_appSettings,SLOT(saveNewConfiguration(Settings_Data&)));
 }

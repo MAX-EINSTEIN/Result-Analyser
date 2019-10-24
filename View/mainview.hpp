@@ -2,15 +2,17 @@
 #define MAINVIEW_H
 
 #include <QMainWindow>
-#include "View/classes.h"
-#include "View/settings_dialog.h"
-#include <vector>
-#include <string>
+
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
 #include <QPrintDialog>
 #include <QPrinter>
+#include <vector>
+#include <string>
+#include "View/classes.hpp"
+#include "View/settingsdialog.hpp"
+#include "Utils/exceltool.hpp"
 
 namespace Ui {
 class MainView;
@@ -42,13 +44,13 @@ public slots:
     void closeFile();
     void exit();
     void print();
-    void Undo();
-    void Redo();
+    void undo();
+    void redo();
     void openSettings();
-    void VisitHomeView();
-    void VisitStudentsView();
-    void VisitScoresView();
-    void VisitResultsView();
+    void visitHomeView();
+    void visitStudentsView();
+    void visitScoresView();
+    void visitResultsView();
     void visitPerformanceReport();
     void logIn();
     void logOut();

@@ -61,18 +61,18 @@ SOURCES += \
 
 
 HEADERS += \
+    Controller/settings_manager.hpp \
+    Model/settings.hpp \
     Utils/exceltool.hpp \
     Utils/performancereportgenerator.hpp \
     Utils/resultanalyser.hpp \
-    View/mainview.h \
-    View/loginwindow.h \
-    View/classes.h \
-    Model/settings.h \
-    Controller/settings_manager.h \
-    View/settings_dialog.h \
+    View/classes.hpp \
+    View/loginwindow.hpp \
+    View/mainview.hpp \
     Utils/settings_data.hpp \
     Utils/singleton_factory.hpp \
-    View/themewidget.h
+    View/settingsdialog.hpp \
+    View/themewidget.hpp
 
 
 FORMS += \

@@ -1,11 +1,11 @@
 #include <QApplication>
-#include "Controller/settings_manager.h"
+#include "Controller/settings_manager.hpp"
 
 int main(int argc, char* argv[]){
     QApplication app(argc,argv);
 
     Settings_Manager Launcher;
-    Launcher.StartProgram();
+    Launcher.startProgram();
 
     return app.exec();
 }

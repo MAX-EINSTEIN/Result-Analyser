@@ -11,7 +11,7 @@ class ExcelTool final
 {
 public:
     ExcelTool();
-    SheetData _processFile(std::string t_fileName,std::string t_filePath = "");
+    static SheetData processFile(std::string t_file);
 };
 
 #endif // EXCELTOOL_H

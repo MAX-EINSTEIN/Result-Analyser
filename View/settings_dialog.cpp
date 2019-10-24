@@ -1,4 +1,4 @@
-#include "settings_dialog.h"
+#include "settingsdialog.hpp"
 #include "ui_settings_dialog.h"
 #include <QDir>
 #include <QFileDialog>
@@ -127,7 +127,7 @@ void Settings_Dialog::setNewSubject(const QString &newSubject)
 }
 
 
-void Settings_Dialog::on_bb_ok_cancel_accepted()
+void Settings_Dialog::onSettingsChangeAccepted()
 {
     Settings_Data &new_settings_data = *(new Settings_Data());
 
@@ -156,24 +156,24 @@ void Settings_Dialog::on_bb_ok_cancel_accepted()
     new_settings_data._subjects_count = subjects_count();
     setSubjectsList(new_settings_data._subjectsList);
 
-    emit Save_Settings(new_settings_data);
+    emit saveSettings(new_settings_data);
 }
 
 
-void Settings_Dialog::on_pb_addStream_clicked()
+void Settings_Dialog::onAddStream()
 {
     ui->lw_streams->addItem(ui->le_stream_name->text());
     setStreamsCount(streamsCount()+1);
 }
 
 
-void Settings_Dialog::on_pb_addSubject_clicked()
+void Settings_Dialog::onAddSubject()
 {
     ui->lw_Subjects->addItem(ui->le_subject_name->text());
     setSubjects_count(subjects_count()+1);
 }
 
-void Settings_Dialog::on_toolButton_clicked()
+void Settings_Dialog::onToolButtonClicked()
 {
     //setSchoolIcon(QFileDialog::getOpenFileName(this,"Choose an icon file",QDir::homePath(),"PNG(*.png) ;; JPEG (*.jpeg) ;; JPG (*.jpg) ;; ICON (*.ico)"));
 }

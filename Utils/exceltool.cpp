@@ -5,13 +5,12 @@ ExcelTool::ExcelTool()
 
 }
 
-
-SheetData ExcelTool::_processFile(std::string t_fileName,std::string t_filePath)
+SheetData ExcelTool::processFile(std::string t_file)
 {
     qDebug("_processFile : Okay ! I m in here");
     xlnt::workbook wb;
     try {
-     wb.load(t_filePath + "/" + t_fileName);
+     wb.load(t_file);
     } catch (std::exception &e) {
         qDebug(e.what());
     }
