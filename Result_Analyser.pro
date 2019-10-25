@@ -47,6 +47,7 @@ QMAKE_POST_LINK += copy 3rdparty/Qxlnt/Qxlnt/release/Qxlnt.dll .\release\
 
 
 SOURCES += \
+    Model/sheetdatatablemodel.cpp \
     Utils/exceltool.cpp \
     Utils/performancereportgenerator.cpp \
     Utils/resultanalyser.cpp \
@@ -63,6 +64,7 @@ SOURCES += \
 HEADERS += \
     Controller/settings_manager.hpp \
     Model/settings.hpp \
+    Model/sheetdatatablemodel.hpp \
     Utils/exceltool.hpp \
     Utils/performancereportgenerator.hpp \
     Utils/resultanalyser.hpp \

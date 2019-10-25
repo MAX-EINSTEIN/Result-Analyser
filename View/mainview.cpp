@@ -1,5 +1,3 @@
-#include "View/mainview.hpp"
-#include "View/themewidget.hpp"
 #include "ui_mainview.h"
 #include <QQuickView>
 #include <QQuickItem>
@@ -7,6 +5,9 @@
 #include <QQmlApplicationEngine>
 #include <QDebug>
 #include <QtDebug>
+#include "View/mainview.hpp"
+#include "View/themewidget.hpp"
+#include "Model/sheetdatatablemodel.hpp"
 
 MainView::MainView(QWidget *parent) :
     QMainWindow(parent),
@@ -46,10 +47,11 @@ MainView::MainView(QWidget *parent) :
     ui->horizontalLayout->addWidget(widget);
 
     ui->tw_Students->setTabEnabled(0,true);
-    ui->tw_Students->setTabEnabled(1,true);
-    ui->tw_Students->setTabEnabled(2,true);
-    ui->tw_Students->setTabEnabled(3,true);
+    ui->tw_Students->setTabEnabled(1,false);
+    ui->tw_Students->setTabEnabled(2,false);
+    ui->tw_Students->setTabEnabled(3,false);
     ui->tw_Students->setTabEnabled(4,true);
+    visitHomeView();
 
     connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(openSettings()));
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openFile()));
@@ -91,12 +93,10 @@ void MainView::setMaxSubjects(int maxSubjects)
 
 void MainView::setSplitter(std::vector<std::string> streamslist,std::vector<std::string> subjectslist)
 {
-    for(size_t i=0;i<streamslist.size();i++)
-    {
+    for(size_t i=0;i<streamslist.size();i++){
         ui->cb_Stream->addItem(streamslist[i].c_str());
     }
-    for(size_t i=0;i<subjectslist.size();i++)
-    {
+    for(size_t i=0;i<subjectslist.size();i++){
         ui->cb_Subjects->addItem(subjectslist[i].c_str());
     }
 }
@@ -109,10 +109,20 @@ void MainView::newFile()
 
 void MainView::openFile()
 {
-    _filename = QFileDialog::getOpenFileName(this,"Choose a excel document",QDir::homePath(),"Old Excel Files (*.xls) ;;  New Excel Files(*.xlsx)");
-    //fileOpened(_filename.toStdString());
+    // Prompt for choosing an excel file [Only excel files from MS excel 2007 onwards are supported]
+    _filename = QFileDialog::getOpenFileName(this,"Choose a excel document",QDir::homePath(),"Excel Files(*.xlsx)");
     qDebug(_filename.toStdString().c_str());
-    ExcelTool::processFile(_filename.toStdString());
+
+    // Enabling tabs and setting current tab to scores tab
+    ui->tw_Students->setTabEnabled(1,true);
+    ui->tw_Students->setTabEnabled(2,true);
+    ui->tw_Students->setTabEnabled(3,true);
+    visitScoresView();
+
+    // Setting up the table view with the model
+    SheetDataTableModel *model = new SheetDataTableModel(this, std::make_unique<SheetData>(ExcelTool::processFile(_filename.toStdString())));
+    ui->tv_scores->verticalHeader()->hide();
+    ui->tv_scores->setModel(model);
 }
 
 void MainView::closeFile()
@@ -147,8 +157,7 @@ void MainView::redo()
 
 void MainView::openSettings()
 {
-    if(_settings != nullptr)
-    {
+    if(_settings != nullptr){
         _settings->show();
     }
 }
