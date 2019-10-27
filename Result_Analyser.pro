@@ -51,13 +51,14 @@ SOURCES += \
     Utils/exceltool.cpp \
     Utils/performancereportgenerator.cpp \
     Utils/resultanalyser.cpp \
+    View/chartwidget.cpp \
+    View/dataanalysisdialog.cpp \
     View/mainview.cpp \
     View/loginwindow.cpp \
     View/classes.cpp \
     Model/settings.cpp \
     Controller/settings_manager.cpp \
     View/settings_dialog.cpp \
-    View/themewidget.cpp \
     main.cpp
 
 
@@ -68,16 +69,18 @@ HEADERS += \
     Utils/exceltool.hpp \
     Utils/performancereportgenerator.hpp \
     Utils/resultanalyser.hpp \
+    View/chartwidget.hpp \
     View/classes.hpp \
+    View/dataanalysisdialog.hpp \
     View/loginwindow.hpp \
     View/mainview.hpp \
     Utils/settings_data.hpp \
     Utils/singleton_factory.hpp \
-    View/settingsdialog.hpp \
-    View/themewidget.hpp
+    View/settingsdialog.hpp
 
 
 FORMS += \
+    View/dataanalysisdialog.ui \
     View/mainview.ui \
     View/loginwindow.ui \
     View/classes.ui \

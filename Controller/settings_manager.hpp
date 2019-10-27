@@ -9,6 +9,7 @@
 #include "View/mainview.hpp"
 #include "View/classes.hpp"
 #include "View/settingsdialog.hpp"
+#include "View/dataanalysisdialog.hpp"
 
 
 class Settings_Manager:public QObject

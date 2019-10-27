@@ -14,16 +14,6 @@
    <item row="0" column="0" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="themeLabel">
-       <property name="text">
-        <string>Theme:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="themeComboBox"/>
-     </item>
-     <item>
       <widget class="QLabel" name="animatedLabel">
        <property name="text">
         <string>Animation:</string>
@@ -73,28 +63,52 @@
  <resources/>
  <connections>
   <connection>
-   <sender>themeComboBox</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>ThemeWidgetForm</receiver>
-   <slot>updateUI()</slot>
-  </connection>
-  <connection>
    <sender>antialiasCheckBox</sender>
    <signal>toggled(bool)</signal>
    <receiver>ThemeWidgetForm</receiver>
    <slot>updateUI()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
   </connection>
   <connection>
    <sender>legendComboBox</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>ThemeWidgetForm</receiver>
    <slot>updateUI()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
   </connection>
   <connection>
    <sender>animatedComboBox</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>ThemeWidgetForm</receiver>
    <slot>updateUI()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
   </connection>
  </connections>
  <slots>

@@ -12,6 +12,7 @@
 #include <string>
 #include "View/classes.hpp"
 #include "View/settingsdialog.hpp"
+#include "View/dataanalysisdialog.hpp"
 #include "Utils/exceltool.hpp"
 
 namespace Ui {
@@ -38,6 +39,8 @@ public:
 
     void setSplitter(std::vector<std::string> streamslist, std::vector<std::string> subjectslist);
 
+    void setDataAnalysisScreen(DataAnalysisDialog *dataAnalysisScreen);
+
 public slots:
     void newFile();
     void openFile();
@@ -61,6 +64,7 @@ private:
     Ui::MainView *ui;
     Classes * _sidebar;
     Settings_Dialog * _settings;
+    DataAnalysisDialog* _dataAnalysisScreen;
     size_t streamsCount;
     int subjectsCount;
     QString _filename;

@@ -42,7 +42,6 @@ void Settings_Manager::setupWindows()
     _settingsScreen->setSubjects_count(_appSettings.maxSubjects());
     _settingsScreen->setSubjectsList(_appSettings.subjectsList());
 
-
     // Setting up MainView
     _mainScreen->setSidebar(_sidebarPanel);
     _mainScreen->setMaxStreams(4);

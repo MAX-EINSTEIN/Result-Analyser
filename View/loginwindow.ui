@@ -67,8 +67,19 @@ background-color:rgb(0,0,0);</string>
    <layout class="QFormLayout" name="formLayout">
     <item row="0" column="0">
      <widget class="QLabel" name="l_Enter">
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Enter Password : </string>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
       </property>
      </widget>
     </item>
@@ -94,7 +105,7 @@ background-color:rgb(0,0,0);</string>
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/img/Images/Icons/MainView_Icon.png&quot; width=&quot;120&quot; height=&quot;120&quot; style=&quot;float: left;&quot; /&gt;&lt;span style=&quot; font-size:36pt; font-weight:600; font-style:italic; color:#992ee5;&quot;&gt;Result Analyser&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/img/Images/Icons/MainView_Icon.png&quot; width=&quot;120&quot; height=&quot;120&quot; style=&quot;float: left;&quot; /&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:36pt; font-weight:600; font-style:italic; color:#992ee5;&quot;&gt;Result Analyser&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

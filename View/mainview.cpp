@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <QtDebug>
 #include "View/mainview.hpp"
-#include "View/themewidget.hpp"
+#include "View/chartwidget.hpp"
 #include "Model/sheetdatatablemodel.hpp"
 
 MainView::MainView(QWidget *parent) :
@@ -43,18 +43,19 @@ MainView::MainView(QWidget *parent) :
     r_container->setFocusPolicy(Qt::TabFocus);
     ui->horizontalLayout_3->addWidget(r_container);
 
-    ThemeWidget *widget = new ThemeWidget();
+    ChartWidget *widget = new ChartWidget();
     ui->horizontalLayout->addWidget(widget);
 
     ui->tw_Students->setTabEnabled(0,true);
     ui->tw_Students->setTabEnabled(1,false);
     ui->tw_Students->setTabEnabled(2,false);
     ui->tw_Students->setTabEnabled(3,false);
-    ui->tw_Students->setTabEnabled(4,true);
+    ui->tw_Students->setTabEnabled(4,false);
     visitHomeView();
 
     connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(openSettings()));
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openFile()));
+    connect(ui->actionClose, SIGNAL(triggered()), this, SLOT(closeFile()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(exit()));
     connect(ui->actionPrint, SIGNAL(triggered()), this, SLOT(print()));
     connect(ui->actionHome, SIGNAL(triggered()), this, SLOT(visitHomeView()));
@@ -117,17 +118,32 @@ void MainView::openFile()
     ui->tw_Students->setTabEnabled(1,true);
     ui->tw_Students->setTabEnabled(2,true);
     ui->tw_Students->setTabEnabled(3,true);
+    ui->tw_Students->setTabEnabled(4,true);
     visitScoresView();
 
+    SheetData list = ExcelTool::processFile(_filename.toStdString());
+    FieldList fields = list.at(0);
+    _dataAnalysisScreen = new DataAnalysisDialog(this, fields);
+    _dataAnalysisScreen->show();
+
     // Setting up the table view with the model
-    SheetDataTableModel *model = new SheetDataTableModel(this, std::make_unique<SheetData>(ExcelTool::processFile(_filename.toStdString())));
+    SheetDataTableModel *model = new SheetDataTableModel(this, std::make_unique<SheetData>(list));
     ui->tv_scores->verticalHeader()->hide();
     ui->tv_scores->setModel(model);
 }
 
 void MainView::closeFile()
 {
+    // Remove all rows and columns from table view
+    ui->tv_scores->clearSpans();
+    ui->tv_scores->setModel(nullptr);
 
+    // Disable tabs and got to HomeView
+    ui->tw_Students->setTabEnabled(1,false);
+    ui->tw_Students->setTabEnabled(2,false);
+    ui->tw_Students->setTabEnabled(3,false);
+    ui->tw_Students->setTabEnabled(4,false);
+    visitHomeView();
 }
 
 void MainView::exit()
@@ -195,6 +211,11 @@ void MainView::logIn()
 void MainView::logOut()
 {
     _loginStatus = false;
+}
+
+void MainView::setDataAnalysisScreen(DataAnalysisDialog *dataAnalysisScreen)
+{
+    _dataAnalysisScreen = dataAnalysisScreen;
 }
 
 void MainView::setSettings(Settings_Dialog *settings)
