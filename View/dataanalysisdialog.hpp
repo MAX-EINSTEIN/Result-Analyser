@@ -19,9 +19,15 @@ public:
     explicit DataAnalysisDialog(QWidget *parent = nullptr, FieldList fields = {});
     ~DataAnalysisDialog();
 
+private slots:
+    void on_b_add_field_clicked();
+
 private:
     Ui::DataAnalysisDialog *ui;
     FieldList _fields;
+
+    void setUpExistingFieldsTableWidget();
+    void setUpNewFieldsTableWidget();
 };
 
 #endif // DATAANALYSISDIALOG_HPP

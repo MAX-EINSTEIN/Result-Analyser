@@ -50,7 +50,7 @@ MainView::MainView(QWidget *parent) :
     ui->tw_Students->setTabEnabled(1,false);
     ui->tw_Students->setTabEnabled(2,false);
     ui->tw_Students->setTabEnabled(3,false);
-    ui->tw_Students->setTabEnabled(4,false);
+    ui->tw_Students->setTabEnabled(4,true);
     visitHomeView();
 
     connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(openSettings()));
@@ -67,6 +67,9 @@ MainView::MainView(QWidget *parent) :
 MainView::~MainView()
 {
     delete ui;
+    delete _sidebar;
+    delete _settings;
+    delete _dataAnalysisScreen;
 }
 
 void MainView::setSidebar(Classes *sidebar)
@@ -75,34 +78,6 @@ void MainView::setSidebar(Classes *sidebar)
     ui->lo_Classes->addWidget(_sidebar);
 }
 
-void MainView::setCentralView()
-{
-
-}
-
-
-void MainView::setMaxStreams(size_t maxStreams)
-{
-    streamsCount = maxStreams;
-}
-
-void MainView::setMaxSubjects(int maxSubjects)
-{
-    subjectsCount = maxSubjects;
-}
-
-
-void MainView::setSplitter(std::vector<std::string> streamslist,std::vector<std::string> subjectslist)
-{
-    for(size_t i=0;i<streamslist.size();i++){
-        ui->cb_Stream->addItem(streamslist[i].c_str());
-    }
-    for(size_t i=0;i<subjectslist.size();i++){
-        ui->cb_Subjects->addItem(subjectslist[i].c_str());
-    }
-}
-
-
 void MainView::newFile()
 {
 
@@ -110,8 +85,9 @@ void MainView::newFile()
 
 void MainView::openFile()
 {
-    // Prompt for choosing an excel file [Only excel files from MS excel 2007 onwards are supported]
-    _filename = QFileDialog::getOpenFileName(this,"Choose a excel document",QDir::homePath(),"Excel Files(*.xlsx)");
+    // Prompt for choosing an excel file
+    // [Only excel files from MS excel 2007 onwards are supported]
+    _filename = QFileDialog::getOpenFileName(this,"Choose an excel document",QDir::homePath(),"Excel Files(*.xlsx)");
     qDebug(_filename.toStdString().c_str());
 
     // Enabling tabs and setting current tab to scores tab
@@ -121,8 +97,8 @@ void MainView::openFile()
     ui->tw_Students->setTabEnabled(4,true);
     visitScoresView();
 
-    SheetData list = ExcelTool::processFile(_filename.toStdString());
-    FieldList fields = list.at(0);
+    SheetData list = ExcelTool::read(_filename.toStdString());
+    FieldList fields = ExcelTool::readHeaders(_filename.toStdString());
     _dataAnalysisScreen = new DataAnalysisDialog(this, fields);
     _dataAnalysisScreen->show();
 
@@ -142,13 +118,13 @@ void MainView::closeFile()
     ui->tw_Students->setTabEnabled(1,false);
     ui->tw_Students->setTabEnabled(2,false);
     ui->tw_Students->setTabEnabled(3,false);
-    ui->tw_Students->setTabEnabled(4,false);
     visitHomeView();
 }
 
 void MainView::exit()
 {
     this->close();
+    this->~MainView();
 }
 
 void MainView::print()
@@ -211,11 +187,6 @@ void MainView::logIn()
 void MainView::logOut()
 {
     _loginStatus = false;
-}
-
-void MainView::setDataAnalysisScreen(DataAnalysisDialog *dataAnalysisScreen)
-{
-    _dataAnalysisScreen = dataAnalysisScreen;
 }
 
 void MainView::setSettings(Settings_Dialog *settings)

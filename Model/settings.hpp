@@ -16,7 +16,7 @@
 #include <utility>
 #include <vector>
 #include <string>
-#include "Utils/settings_data.hpp"
+#include "settings_data.hpp"
 
 typedef std::pair<QJsonObject,QJsonParseError> JsonObjErrPair;
 

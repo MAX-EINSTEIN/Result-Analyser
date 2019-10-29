@@ -98,58 +98,6 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <widget class="QLabel" name="l_Stream">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(194, 138, 254, 255) );
-color:rgb(0,0,0);</string>
-           </property>
-           <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/img/Images/Icons/streams.png&quot; height=&quot;24&quot; style=&quot;float: left;&quot;/&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Select the Stream :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="textFormat">
-            <enum>Qt::RichText</enum>
-           </property>
-           <property name="scaledContents">
-            <bool>false</bool>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="cb_Stream">
-           <property name="styleSheet">
-            <string notr="true">color:rgb(0,0,0)</string>
-           </property>
-           <property name="currentText">
-            <string/>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
-          <widget class="QLabel" name="l_Subject">
-           <property name="styleSheet">
-            <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(194, 138, 254, 255) );
-color:rgb(0,0,0);</string>
-           </property>
-           <property name="text">
-            <string>&lt;img src=&quot;:/img/Images/Icons/subject.png&quot; height=&quot;24&quot; style=&quot;float: left;&quot;/&gt;Select the Subject :</string>
-           </property>
-          </widget>
-          <widget class="QComboBox" name="cb_Subjects">
-           <property name="styleSheet">
-            <string notr="true">color:rgb(0,0,0)</string>
-           </property>
-           <property name="currentText">
-            <string/>
-           </property>
-           <property name="currentIndex">
-            <number>-1</number>
-           </property>
-          </widget>
          </widget>
         </item>
         <item>

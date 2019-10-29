@@ -5,7 +5,7 @@
 #include <QAbstractButton>
 #include <vector>
 #include <string>
-#include "Utils/settings_data.hpp"
+#include "Model/settings_data.hpp"
 
 namespace Ui {
 class Settings_Dialog;

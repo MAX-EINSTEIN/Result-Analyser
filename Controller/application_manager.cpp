@@ -1,6 +1,6 @@
-#include "settings_manager.hpp"
+#include "application_manager.hpp"
 
-Settings_Manager::Settings_Manager():
+Application_Manager::Application_Manager():
     _appSettings(SingletonFactory<Settings>::GetClassAsSingleton()),
     _loginScreen(new LoginWindow(nullptr)),
     _mainScreen(nullptr),
@@ -9,19 +9,19 @@ Settings_Manager::Settings_Manager():
 
 }
 
-void Settings_Manager::startProgram()
+void Application_Manager::startProgram()
 {
     setupWindows();
 }
 
 
-void Settings_Manager::initSettings()
+void Application_Manager::initSettings()
 {
     _appSettings.parseJsonData();
 }
 
 
-void Settings_Manager::setupWindows()
+void Application_Manager::setupWindows()
 {
     initSettings();
 
@@ -44,8 +44,6 @@ void Settings_Manager::setupWindows()
 
     // Setting up MainView
     _mainScreen->setSidebar(_sidebarPanel);
-    _mainScreen->setMaxStreams(4);
-    _mainScreen->setSplitter(_appSettings.streamsList(),_appSettings.subjectsList());
     _mainScreen->setSettings(_settingsScreen);
 
     // Setting up login Window

@@ -3,6 +3,7 @@
 
 #include <QtWidgets/QWidget>
 #include <QtCharts/QChartGlobal>
+#include "Utils/exceltool.hpp"
 
 QT_BEGIN_NAMESPACE
 class QComboBox;
@@ -15,7 +16,7 @@ class QChartView;
 class QChart;
 QT_CHARTS_END_NAMESPACE
 
-using Data = QPair<QPointF, QString>;
+using Data = QPair<qreal, QString>;
 using DataList = QList<Data>;
 using DataTable = QList<DataList>;
 
@@ -32,19 +33,15 @@ private Q_SLOTS:
     void updateUI();
 
 private:
-    DataTable generateRandomData(int listCount, int valueMax, int valueCount) const;
-    DataTable populateDataTable();
+    DataTable populateDataTable(SheetData listOfScoresList);
     void populateAnimationBox();
     void populateLegendBox();
     void connectSignals();
-    QChart *createAreaChart() const;
-    QChart *createBarChart(int valueCount) const;
-    QChart *createLineChart() const;
+    QChart *createBarChart() const;
 
 private:
-    int _listCount;
-    int _valueMax;
-    int _valueCount;
+    SheetData _listOfScoresList;
+    int _scoreMax;
     QList<QChartView *> _charts;
     DataTable _dataTable;
 

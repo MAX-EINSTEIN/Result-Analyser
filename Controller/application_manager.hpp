@@ -12,12 +12,12 @@
 #include "View/dataanalysisdialog.hpp"
 
 
-class Settings_Manager:public QObject
+class Application_Manager:public QObject
 {
     Q_OBJECT
 
 public:
-    Settings_Manager();
+    Application_Manager();
     void startProgram();
 
 private:

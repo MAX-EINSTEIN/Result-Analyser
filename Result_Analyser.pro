@@ -47,28 +47,25 @@ QMAKE_POST_LINK += copy 3rdparty/Qxlnt/Qxlnt/release/Qxlnt.dll .\release\
 
 
 SOURCES += \
+    Controller/application_manager.cpp \
     Model/sheetdatatablemodel.cpp \
     Utils/exceltool.cpp \
-    Utils/performancereportgenerator.cpp \
-    Utils/resultanalyser.cpp \
     View/chartwidget.cpp \
     View/dataanalysisdialog.cpp \
     View/mainview.cpp \
     View/loginwindow.cpp \
     View/classes.cpp \
     Model/settings.cpp \
-    Controller/settings_manager.cpp \
     View/settings_dialog.cpp \
     main.cpp
 
 
 HEADERS += \
-    Controller/settings_manager.hpp \
+    Controller/application_manager.hpp \
     Model/settings.hpp \
+    Model/settings_data.hpp \
     Model/sheetdatatablemodel.hpp \
     Utils/exceltool.hpp \
-    Utils/performancereportgenerator.hpp \
-    Utils/resultanalyser.hpp \
     View/chartwidget.hpp \
     View/classes.hpp \
     View/dataanalysisdialog.hpp \
@@ -80,12 +77,12 @@ HEADERS += \
 
 
 FORMS += \
+    View/chartwidget.ui \
     View/dataanalysisdialog.ui \
     View/mainview.ui \
     View/loginwindow.ui \
     View/classes.ui \
-    View/settings_dialog.ui \
-    View/themewidget.ui
+    View/settings_dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -10,8 +10,8 @@ using SheetRow = std::vector<std::string>;
 class ExcelTool final
 {
 public:
-    ExcelTool();
-    static SheetData processFile(std::string t_file);
+    static SheetData read(std::string t_file);
+    static SheetRow readHeaders(std::string t_file);
 };
 
 #endif // EXCELTOOL_H

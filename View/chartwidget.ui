@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ThemeWidgetForm</class>
- <widget class="QWidget" name="ThemeWidgetForm">
+ <class>ChartWidgetForm</class>
+ <widget class="QWidget" name="ChartWidgetForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -65,7 +65,7 @@
   <connection>
    <sender>antialiasCheckBox</sender>
    <signal>toggled(bool)</signal>
-   <receiver>ThemeWidgetForm</receiver>
+   <receiver>ChartWidgetForm</receiver>
    <slot>updateUI()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -81,7 +81,7 @@
   <connection>
    <sender>legendComboBox</sender>
    <signal>currentIndexChanged(int)</signal>
-   <receiver>ThemeWidgetForm</receiver>
+   <receiver>ChartWidgetForm</receiver>
    <slot>updateUI()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -97,7 +97,7 @@
   <connection>
    <sender>animatedComboBox</sender>
    <signal>currentIndexChanged(int)</signal>
-   <receiver>ThemeWidgetForm</receiver>
+   <receiver>ChartWidgetForm</receiver>
    <slot>updateUI()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -26,20 +26,8 @@ class MainView : public QMainWindow
 public:
     explicit MainView(QWidget *parent = nullptr);
     ~MainView();
-
     void setSidebar(Classes *sidebar);
-
-    void setCentralView();
-
-    void setMaxStreams(size_t maxStreams);
-
-    void setMaxSubjects(int maxSubjects);
-
     void setSettings(Settings_Dialog *settings);
-
-    void setSplitter(std::vector<std::string> streamslist, std::vector<std::string> subjectslist);
-
-    void setDataAnalysisScreen(DataAnalysisDialog *dataAnalysisScreen);
 
 public slots:
     void newFile();
@@ -60,6 +48,7 @@ public slots:
 
 signals:
     std::string fileOpened(std::string filename);
+
 private:
     Ui::MainView *ui;
     Classes * _sidebar;
