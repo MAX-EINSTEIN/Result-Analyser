@@ -56,6 +56,7 @@ SOURCES += \
     View/loginwindow.cpp \
     View/classes.cpp \
     Model/settings.cpp \
+    View/performancereportdialog.cpp \
     View/settings_dialog.cpp \
     main.cpp
 
@@ -71,8 +72,8 @@ HEADERS += \
     View/dataanalysisdialog.hpp \
     View/loginwindow.hpp \
     View/mainview.hpp \
-    Utils/settings_data.hpp \
     Utils/singleton_factory.hpp \
+    View/performancereportdialog.hpp \
     View/settingsdialog.hpp
 
 
@@ -82,6 +83,7 @@ FORMS += \
     View/mainview.ui \
     View/loginwindow.ui \
     View/classes.ui \
+    View/performancereportdialog.ui \
     View/settings_dialog.ui
 
 # Default rules for deployment.

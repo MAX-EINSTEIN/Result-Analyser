@@ -251,6 +251,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
     <addaction name="actionStudents"/>
     <addaction name="actionScores"/>
     <addaction name="actionResults"/>
+    <addaction name="actionPerformance"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
@@ -512,6 +513,18 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
    </property>
    <property name="shortcut">
     <string>Alt+R</string>
+   </property>
+  </action>
+  <action name="actionPerformance">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/img/Images/Icons/MainView_Icon.png</normaloff>:/img/Images/Icons/MainView_Icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Performance</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+P</string>
    </property>
   </action>
  </widget>

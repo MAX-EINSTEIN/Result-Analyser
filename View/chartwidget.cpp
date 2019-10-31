@@ -1,5 +1,5 @@
 #include "chartwidget.hpp"
-#include "ui_themewidget.h"
+#include "ui_chartwidget.h"
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QAbstractBarSeries>
@@ -23,18 +23,17 @@
 #include <QtCharts/QValueAxis>
 #include <cstdlib>
 
-ChartWidget::ChartWidget(QWidget *parent) :
+ChartWidget::ChartWidget(QWidget *parent,SheetData listOfScoresList,
+                         int scoreMax, QStringList categoryList,
+                         SheetRow titleList, QString chartTitle) :
     QWidget(parent),
-    _listOfScoresList({
-                        {"99", "88", "32", "72", "65"},
-                        {"46", "78", "88", "99", "98"},
-                        {"99", "74", "82", "95", "78"},
-                        {"90", "87", "47", "90", "90"},
-                        {"79", "89", "89", "67", "89"}
-                      }),
-    _scoreMax(100),
+    _listOfScoresList(listOfScoresList),
+    _scoreMax(scoreMax),
+    _categoriesList(categoryList),
+    _setTitleList(titleList),
+    _chartTitle(chartTitle),
     _dataTable(populateDataTable(_listOfScoresList)),
-    ui(new Ui_ThemeWidgetForm)
+    ui(new Ui_ChartWidgetForm)
 {
     ui->setupUi(this);
     populateAnimationBox();
@@ -83,6 +82,24 @@ DataTable ChartWidget::populateDataTable(SheetData listOfScoresList)
         dataTable << dataList;
     }
 
+//    for(size_t i(0); i<listOfScoresList.size();i++){
+//        DataList dataList;
+//        for(size_t j(0);j<listOfScoresList.at(i).size();j++){
+//            auto value = listOfScoresList.at(j).at(i);
+//            qreal percent = std::stod(value)/_scoreMax*100.0;
+//            QString label = value.c_str();
+//            dataList << Data(percent, label);
+//        }
+//        dataTable << dataList;
+//    }
+
+    qDebug("Printing _dataTable");
+    for(const auto&list:_dataTable){
+        for(const auto&el:list){
+            qDebug(QString::number(el.first).toStdString().c_str());
+        }
+    }
+
     return dataTable;
 }
 
@@ -108,21 +125,21 @@ void ChartWidget::populateLegendBox()
 QChart *ChartWidget::createBarChart() const
 {
     QChart *chart = new QChart();
-    chart->setTitle("Bar chart");
+    chart->setTitle(_chartTitle);
 
     QBarSeries *series = new QBarSeries();
-    QStringList categories;
     for (int i(0); i < _dataTable.count(); i++) {
-        QBarSet *set = new QBarSet("Bar set " + QString::number(i));
+        QBarSet *set = new QBarSet(_setTitleList.at(i).c_str());
         for (const Data &data : _dataTable[i])
             *set << data.first;
-        categories << ("Set : " + QString::number(i));
+//        for(int j(0); j<_dataTable.at(i).count();j++)
+//            *set << _dataTable.at(j).at(i).first;
         series->append(set);
     }
     chart->addSeries(series);
 
     QBarCategoryAxis* axis = new QBarCategoryAxis();
-    axis->append(categories);
+    axis->append(_categoriesList);
     chart->createDefaultAxes();
     chart->setAxisX(axis, series);
     chart->axisY(nullptr)->setMax(100);

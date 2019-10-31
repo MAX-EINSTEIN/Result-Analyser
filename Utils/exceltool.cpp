@@ -13,7 +13,7 @@ SheetData ExcelTool::read(std::string t_file)
     qDebug("_processFile : Now I got my file");
     SheetData theWholeSpreadSheet;
     try {
-        for (auto row : file.rows(false))
+        for (auto row : file.rows())
         {
             SheetRow aSingleRow;
             for (auto cell : row)
@@ -26,7 +26,7 @@ SheetData ExcelTool::read(std::string t_file)
     } catch (std::exception e) {
         qDebug(e.what());
     }
-
+    qDebug("_processFile : Now I got out");
     return theWholeSpreadSheet;
 }
 
@@ -52,6 +52,7 @@ SheetRow ExcelTool::readHeaders(std::string t_file)
     } catch (std::exception e) {
         qDebug(e.what());
     }
+    qDebug("_processFile : Now I got out");
     return row;
 }
 

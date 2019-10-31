@@ -7,6 +7,7 @@
 #include <QtDebug>
 #include "View/mainview.hpp"
 #include "View/chartwidget.hpp"
+#include "View/performancereportdialog.hpp"
 #include "Model/sheetdatatablemodel.hpp"
 
 MainView::MainView(QWidget *parent) :
@@ -43,8 +44,6 @@ MainView::MainView(QWidget *parent) :
     r_container->setFocusPolicy(Qt::TabFocus);
     ui->horizontalLayout_3->addWidget(r_container);
 
-    ChartWidget *widget = new ChartWidget();
-    ui->horizontalLayout->addWidget(widget);
 
     ui->tw_Students->setTabEnabled(0,true);
     ui->tw_Students->setTabEnabled(1,false);
@@ -62,6 +61,8 @@ MainView::MainView(QWidget *parent) :
     connect(ui->actionStudents, SIGNAL(triggered()), this, SLOT(visitStudentsView()));
     connect(ui->actionScores, SIGNAL(triggered()), this, SLOT(visitScoresView()));
     connect(ui->actionResults, SIGNAL(triggered()),this, SLOT(visitResultsView()));
+    connect(ui->actionPerformance, SIGNAL(triggered()),this, SLOT(setUpPerformanceReportTab()));
+    //connect(this, SIGNAL(performanceReportTabSetUpCompleted()), this, SLOT(visitPerformanceReport()));
 }
 
 MainView::~MainView()
@@ -176,7 +177,22 @@ void MainView::visitResultsView()
 
 void MainView::visitPerformanceReport()
 {
+    ChartWidget *widget = new ChartWidget(nullptr,
+                                          _performanceReportDialog->listOfScoresList(),
+                                          _performanceReportDialog->scoreMax(),
+                                          _performanceReportDialog->fileList(),
+                                          _performanceReportDialog->subjectList(),
+                                          "Subject-wise Score Analysis for different semesters");
+    ui->horizontalLayout->addWidget(widget);
     ui->tw_Students->setCurrentIndex(4);
+}
+
+void MainView::setUpPerformanceReportTab()
+{
+    _performanceReportDialog = new PerformanceReportDialog();
+    _performanceReportDialog->show();
+    connect(_performanceReportDialog, SIGNAL(onOkayClicked()), this, SLOT(visitPerformanceReport()));
+    //emit performanceReportTabSetUpCompleted();
 }
 
 void MainView::logIn()

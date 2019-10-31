@@ -13,6 +13,7 @@
 #include "View/classes.hpp"
 #include "View/settingsdialog.hpp"
 #include "View/dataanalysisdialog.hpp"
+#include "View/performancereportdialog.hpp"
 #include "Utils/exceltool.hpp"
 
 namespace Ui {
@@ -43,17 +44,20 @@ public slots:
     void visitScoresView();
     void visitResultsView();
     void visitPerformanceReport();
+    void setUpPerformanceReportTab();
     void logIn();
     void logOut();
 
 signals:
     std::string fileOpened(std::string filename);
+    void performanceReportTabSetUpCompleted();
 
 private:
     Ui::MainView *ui;
     Classes * _sidebar;
     Settings_Dialog * _settings;
     DataAnalysisDialog* _dataAnalysisScreen;
+    PerformanceReportDialog* _performanceReportDialog;
     size_t streamsCount;
     int subjectsCount;
     QString _filename;

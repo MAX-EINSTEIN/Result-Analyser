@@ -32,13 +32,13 @@ int SheetDataTableModel::columnCount(const QModelIndex &parent) const
         return 0;
     }
     auto row = _data->at(0);
-    return (row.size()-1);
+    return (row.size());
 }
 
 QVariant SheetDataTableModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DisplayRole && index.isValid())
-        return QString(_data->at(index.row()+1) .at(index.column()+1).c_str());
+        return QString(_data->at(index.row()+1) .at(index.column()).c_str());
 
     return QVariant();
 }
